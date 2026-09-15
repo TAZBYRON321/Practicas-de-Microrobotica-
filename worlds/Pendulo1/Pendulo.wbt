@@ -1,0 +1,102 @@
+#VRML_SIM R2025a utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/floors/protos/RectangleArena.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/appearances/protos/OsbWood.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/appearances/protos/HammeredCopper.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/appearances/protos/Plastic.proto"
+
+WorldInfo {
+}
+Viewpoint {
+  orientation -0.18174623882280613 -0.19154744945920155 0.9645091390336528 4.728776409415914
+  position 0.03171031912717466 0.948363290810571 1.0336251940425623
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+RectangleArena {
+  floorSize 8 6
+  floorTileSize 0.34 0.34
+}
+Solid {
+  translation 0 0 0.38
+  children [
+    Shape {
+      appearance OsbWood {
+      }
+      geometry DEF GEOMETRIA_MESA Box {
+        size 0.7 0.5 0.76
+      }
+    }
+  ]
+  name "mesa"
+  boundingObject USE GEOMETRIA_MESA
+}
+Robot {
+  translation 0 0.25 0.77
+  children [
+    Shape {
+      appearance HammeredCopper {
+      }
+      geometry DEF FORMA_MOTOR Box {
+        size 0.01 0.0305 0.0211
+      }
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        axis 0 1 0
+        anchor 0 0.0178 0
+      }
+      device [
+        RotationalMotor {
+          name "motor"
+        }
+        PositionSensor {
+          name "encoder"
+        }
+      ]
+      endPoint Solid {
+        rotation 0 1 0 0
+        children [
+          Solid {
+            translation 0 0 0.15
+            children [
+              Shape {
+                appearance Plastic {
+                }
+                geometry Sphere {
+                  radius 0.03
+                }
+              }
+            ]
+            name "solid(1)"
+          }
+          Solid {
+            translation 0 0 0.08
+            rotation 0 1 0 0
+            children [
+              Shape {
+                appearance Plastic {
+                }
+                geometry DEF FORMA_TUBO Cylinder {
+                  height 0.14
+                  radius 0.0025
+                }
+              }
+            ]
+            boundingObject USE FORMA_TUBO
+            physics Physics {
+              density 1240
+            }
+          }
+        ]
+      }
+    }
+  ]
+  controller "controlador_pendulo"
+}
+Group {
+}

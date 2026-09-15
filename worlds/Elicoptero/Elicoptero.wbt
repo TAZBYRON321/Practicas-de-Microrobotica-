@@ -1,0 +1,56 @@
+#VRML_SIM R2025a utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/floors/protos/RectangleArena.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/appearances/protos/Cardboard.proto"
+
+WorldInfo {
+}
+Viewpoint {
+  orientation -0.1781310334244018 0.337699446429196 0.9242447829512316 1.037237761362715
+  position -1.2338469745276432 -1.806182516529607 1.0710904441111022
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+RectangleArena {
+}
+Robot {
+  translation 0 0 0.14
+  children [
+    Propeller {
+      shaftAxis 0 0 1
+      device RotationalMotor {
+        name "MOTOR1"
+      }
+      fastHelix Solid {
+        children [
+          DEF HELICE_HELICOPTERO Shape {
+            appearance Appearance {
+              material Material {
+              }
+            }
+            geometry Box {
+              size 0.01 0.2 0.01
+            }
+          }
+        ]
+      }
+    }
+    Shape {
+      appearance Cardboard {
+      }
+      geometry DEF Forma_helicoptero Box {
+        size 0.1 0.2 0.1
+      }
+    }
+  ]
+  boundingObject USE Forma_helicoptero
+  physics Physics {
+    density -1
+    mass 1
+  }
+  controller "VELOCIDAD_CONSTANTE"
+}
